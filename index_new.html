@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刀客源码网演示站</title>
+  <meta name="keywords" content="刀客源码网演示站，永久地址发布页,最新永久在线地址发布页发布,最新发布地址,源开网站,网址发布页">
+  <meta name="description" content="刀客源码网演示站，永久地址发布页,最新永久在线地址发布页发布,最新发布地址,源开网站,网址发布页">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+      background-attachment: fixed;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(transparent 1px, transparent 2px),
+        linear-gradient(90deg, rgba(0,255,249,0.02) 1px, transparent 2px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid #00fff9;
+      box-shadow: 0 0 20px rgba(0,255,249,0.4), 0 0 40px rgba(0,255,249,0.2);
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,255,249,0.4), 0 0 40px rgba(0,255,249,0.2); }
+      50% { box-shadow: 0 0 30px rgba(0,255,249,0.6), 0 0 60px rgba(0,255,249,0.3); }
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #00fff9, #ff00ff, #00fff9);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-flow 3s ease infinite;
+      text-shadow: none;
+    }
+
+    @keyframes gradient-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    .subtitle a {
+      color: #00fff9;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .subtitle a:hover {
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .warning-box {
+      background: rgba(255,0,255,0.1);
+      border: 1px solid rgba(255,0,255,0.3);
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-bottom: 30px;
+      font-size: 13px;
+      color: #ff00ff;
+      animation: blink-border 2s ease infinite;
+    }
+
+    @keyframes blink-border {
+      0%, 100% { border-color: rgba(255,0,255,0.3); }
+      50% { border-color: rgba(255,0,255,0.8); }
+    }
+
+    .divider {
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00fff9, transparent);
+      margin: 20px auto;
+    }
+
+    .content-list {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .content-list li {
+      margin: 12px 0;
+    }
+
+    .content-list li a {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,255,249,0.3);
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-list li a::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,249,0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .content-list li a:hover::before {
+      left: 100%;
+    }
+
+    .content-list li a:hover {
+      background: rgba(0,255,249,0.1);
+      border-color: #00fff9;
+      transform: translateX(5px);
+      box-shadow: 0 0 20px rgba(0,255,249,0.2);
+    }
+
+    .content-list li a .icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #00fff9, #ff00ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 16px;
+    }
+
+    .content-list li a span {
+      flex: 1;
+      text-align: left;
+    }
+
+    .content-list li a .arrow {
+      color: #00fff9;
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    .content-list li a:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer span {
+      color: #00fff9;
+    }
+
+    @media (max-width: 480px) {
+      .title { font-size: 22px; }
+      .content-list li a { padding: 12px 15px; font-size: 14px; }
+      .content-list li a .icon { width: 28px; height: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="avatar-wrapper">
+      <div class="avatar">🔥</div>
+    </div>
+
+    <h1 class="title">刀客源码网永久发布页</h1>
+
+    <div class="subtitle">
+      保存好此网站,访问不迷路哦<br>
+      手机端请将本页添加到浏览器收藏夹或书签<br>
+      防失联永久链接：<a href="https://www.dkewl.com" target="_blank">dkewl.com</a>
+    </div>
+
+    <div class="warning-box">
+      ⚠️ 发现异常？请认准最新官方域名
+    </div>
+
+    <div class="divider"></div>
+
+    <ul class="content-list">
+      <li>
+        <a href="https://www.dkewl.com" target="_blank">
+          <div class="icon">🌐</div>
+          <span>主站入口 - dkewl.com</span>
+          <span class="arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.dkewl.com" target="_blank">
+          <div class="icon">📺</div>
+          <span>备用线路 A</span>
+          <span class="arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.dkewl.com" target="_blank">
+          <div class="icon">⚡</div>
+          <span>备用线路 B</span>
+          <span class="arrow">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="//719hyw.cn" target="_blank">
+          <div class="icon">🎯</div>
+          <span>备用地址</span>
+          <span class="arrow">→</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="btn-group">
+      <a href="https://www.dkewl.com" target="_blank" class="btn">🚀 立即访问</a>
+      <a href="javascript:void(0)" onclick="alert('请按 Ctrl+D 添加收藏夹')" class="btn">⭐ 收藏本站</a>
+    </div>
+
+    <div class="footer">
+      <p>© 2024 <span>刀客源码网</span> | 永久域名: <span>dkewl.com</span></p>
+      <p style="margin-top:10px;">如遇访问问题请联系管理员</p>
+    </div>
+  </div>
+</body>
+</html>
